@@ -19,10 +19,16 @@ def generate20eggs(bees_rate=bees_rate, mutant=mutant, mutantRate=5):
             if bees_rate[bee] >= x:
                 current_run_new += 1
                 new_eggs.append(bee)
-                if bee == mutant:
-                    bees_rate[bee] += mutantRate*0.05
-                else:
-                    bees_rate[bee] -= deltaR
+                for bee in bees:
+                    if bee == mutant:
+                        bees_rate[bee] += mutantRate * 0.05
+                    else:
+                        bees_rate[bee] -= deltaR
+
+                # if bee == mutant:
+                #     bees_rate[bee] += mutantRate*0.05
+                # else:
+                #     bees_rate[bee] -= deltaR
 
     if len(new_eggs)> egg_population:
         endSelect = random.sample(new_eggs[-1*current_run_new:], len(new_eggs)-egg_population)
@@ -51,7 +57,8 @@ def pctMutant(eggs, mutant):
 import matplotlib.pyplot as plt
 checkRates = [x+1 for x in range(99)]
 rateL, generationL, mutationRateL = [], [], []
-for rate in range(2,12):
+# for rate in range(2,12):
+for rate in [y*0.5+2.0 for y in range(0,48)]:
     rateL.append(rate)
     deltaR = rate * 0.05
     print('rate: ', rate, end='; ')
