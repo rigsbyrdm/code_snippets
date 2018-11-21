@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import string, random, statistics
+import matplotlib.pyplot as plt
 
 bees = list(string.ascii_lowercase)[:10]
 rate = 7
@@ -25,11 +26,6 @@ def generate20eggs(bees_rate=bees_rate, mutant=mutant, mutantRate=5):
                     else:
                         bees_rate[bee] -= deltaR
 
-                # if bee == mutant:
-                #     bees_rate[bee] += mutantRate*0.05
-                # else:
-                #     bees_rate[bee] -= deltaR
-
     if len(new_eggs)> egg_population:
         endSelect = random.sample(new_eggs[-1*current_run_new:], len(new_eggs)-egg_population)
         finalSelectEggs = new_eggs[:egg_population-len(endSelect)] + endSelect
@@ -39,7 +35,6 @@ def generate20eggs(bees_rate=bees_rate, mutant=mutant, mutantRate=5):
         return gen, new_eggs
     else:
         raise RuntimeError('note egg length error')
-        # return generate20eggs(bees_rate, mutant, mutantStartingRate)
 
 def selectGenRuns(genAndNewEggs):
     return genAndNewEggs[0]
@@ -54,7 +49,6 @@ def pctMutant(eggs, mutant):
             matches += 1
     return (matches/len(eggs))*100
 
-import matplotlib.pyplot as plt
 checkRates = [x+1 for x in range(99)]
 rateL, generationL, mutationRateL = [], [], []
 # for rate in range(2,12):
